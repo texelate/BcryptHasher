@@ -7,7 +7,7 @@
  * A class to hash passwords using bcrypt
  *
  * @author			Tim Bennett
- * @version			1.0.0
+ * @version			1.0.1
  *
  * Download the latest version at www.texelate.co.uk/lab/project/bcrypt-hasher/
  *
@@ -51,6 +51,7 @@ class BcryptHasher {
 	const   MIN_ROUNDS	   	= 4;		// Minimum rounds, as set by bcrypt
 	const   MAX_ROUNDS		= 31;		// Maximum rounds, as set by bcrypt
 	const   ERR_NO_BLOWFISH	= 0;		// Error code thrown if bcrypt isn't installed
+	const	SALT_LENGTH		= 22;		// Length of the salt
 
 
 	/**
@@ -94,11 +95,21 @@ class BcryptHasher {
 		                              range('a', 'z'), 
 		                              range(0, 9), 
 		                              array('.', '/'));
+		                              
+		// Create a single string from the salt
+		$saltString = '';
+		
+		foreach($saltChars as $char) {
+		
+			$saltString .= $char;
+		
+		}
 		
 		// Make a random 22 character salt
-		for($i = 0; $i < 22; $i ++) {
+		for($i = 0; $i < self::SALT_LENGTH; $i ++) {
 		
-			$salt .= $saltChars[array_rand($saltChars)];
+			// Use mt_rand() to generate the salt, while not cryptographically secure it's good enough for a salt 
+			$salt .= $saltChars[mt_rand(0, strlen($saltString) - 1)];
 			
 		}
 		

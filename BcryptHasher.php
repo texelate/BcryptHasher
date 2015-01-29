@@ -7,7 +7,7 @@
  * A class to hash passwords using bcrypt
  *
  * @author			Tim Bennett
- * @version			1.0.1
+ * @version			1.0.2
  *
  * Download the latest version at www.texelate.co.uk/lab/project/bcrypt-hasher/
  *

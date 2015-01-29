@@ -5,13 +5,13 @@
  * Test script for BcryptHasher.php
  *
  * @author			Tim Bennett
- * @version			1.0.1
+ * @version			1.0.2
  *
- * Download the latest version at www.texelate.co.uk/lab/project/blowfish-hasher/
+ * Download the latest version at www.texelate.co.uk/lab/project/bcrypt-hasher/
  *
  * Open source under the MIT license:
  *
- * Copyright (c) 2014 Tim Bennett, Texelate Ltd, www.texelate.co.uk
+ * Copyright (c) 2015 Texelate Ltd, www.texelate.co.uk
  *  
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,8 @@
  * THE SOFTWARE.
  *
  */ 
- 
+
+
 
 /**
  * Include the class
@@ -46,17 +47,17 @@ require 'BcryptHasher.php';
  * - Rounds can be between 4 and 31
  * - More rounds is slower and more secure
  * - The default is 9
- * - You can change the rounds using $BcryptHasher->setRounds($rounds);
+ * - You can change the rounds using $bcryptHasher->setRounds($rounds);
  */
 try {
 
-	$BcryptHasher = new BcryptHasher();
+	$bcryptHasher = new BcryptHasher();
 	
 }
 catch(Exception $e) {
 
 	// Blowfish isn't installed, check your hosting setup
-	// Any decent hosting company sohuld have this installed
+	// Any decent hosting company should have this installed
 	exit($e->getMessage());
 
 }
@@ -72,7 +73,7 @@ $incorrectPassword		= 'Wrong password!';
 /**
  * Hash the password
  */
-$hashedPassword = $BcryptHasher->hash($passwordToHash);
+$hashedPassword = $bcryptHasher->hash($passwordToHash);
 
 
 /**
@@ -86,8 +87,8 @@ echo '<p>Hashed password: ' . $hashedPassword . '</p>';
  * one inputted by a user (e.g. from a login page) and compare the hashed results
  */
 echo '<pre>';
-var_dump($BcryptHasher->compare($passwordToHash,    $hashedPassword)); // True, correct password
-var_dump($BcryptHasher->compare($incorrectPassword, $hashedPassword)); // False, incorrect password
+var_dump($bcryptHasher->compare($passwordToHash,    $hashedPassword)); // True, correct password
+var_dump($bcryptHasher->compare($incorrectPassword, $hashedPassword)); // False, incorrect password
 echo '</pre>';
 
 
